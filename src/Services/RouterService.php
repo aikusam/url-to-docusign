@@ -186,74 +186,74 @@ class RouterService
     {
 
 
-        // $page = $_GET['page'] ?? 'home';
+        $page = $_GET['page'] ?? 'home';
 
 
-        // if ($page == 'home') {
+        if ($page == 'home') {
 
-        //     // We're not logged in and Quickstart is true:  Route to the 1st example.
-        //     if ($GLOBALS['DS_CONFIG']['quickstart'] == 'true' && $this->ds_token_ok() == false  && !isset($_SESSION['beenHere'])) {
-        //         header('Location: ' . $GLOBALS['app_url'] . '/index.php?page=eg001');
-        //     } else {
-        //         error_reporting(E_ALL & ~E_NOTICE);
-        //         $controller = '\Example\Controllers\Examples\\' . $this->getController($page);
-        //         new $controller($page);
-        //         exit();
-        //     }
-        // }
+            // We're not logged in and Quickstart is true:  Route to the 1st example.
+            if ($GLOBALS['DS_CONFIG']['quickstart'] == 'true' && $this->ds_token_ok() == false  && !isset($_SESSION['beenHere'])) {
+                header('Location: ' . $GLOBALS['app_url'] . '/index.php?page=eg001');
+            } else {
+                error_reporting(E_ALL & ~E_NOTICE);
+                $controller = '\Example\Controllers\Examples\\' . $this->getController($page);
+                new $controller($page);
+                exit();
+            }
+        }
 
-        // if ($page == 'must_authenticate') {
-        //     //is it quickstart have they signed in already? 
-        //     if ($GLOBALS['DS_CONFIG']['quickstart'] == 'true') {
-        //         //Let's just shortcut to login immediately
-        //         $this->ds_login();
-        //         exit();
-        //     }
-        //     $controller = 'Example\Controllers\Examples\\' . $this->getController($page);
-        //     $c = new $controller();
-        //     $c->controller();
-        //     exit();
-        // } elseif ($page == 'ds_login') {
-        //     $this->ds_login(); // See below in oauth section
-        //     exit();
-        // } elseif ($page == 'ds_callback') {
-        //     $this->ds_callback(); // See below in oauth section
-        //     exit();
-        // } elseif ($page == 'ds_logout') {
-        //     $_SESSION['beenHere'] = true;
-        //     $this->ds_logout(); // See below in oauth section
-        //     exit();
-        // } elseif ($page == 'ds_return') {
-        //     $GLOBALS['twig']->display('ds_return.html', [
-        //         'title' => 'Returned data',
-        //         'event' => isset($_GET['event']) ? $_GET['event'] : false,
-        //         'envelope_id' => isset($_GET['envelope_id']) ? $_GET['envelope_id'] : false,
-        //         'state' => isset($_GET['state']) ? $_GET['state'] : false
-        //     ]);
+        if ($page == 'must_authenticate') {
+            //is it quickstart have they signed in already? 
+            if ($GLOBALS['DS_CONFIG']['quickstart'] == 'true') {
+                //Let's just shortcut to login immediately
+                $this->ds_login();
+                exit();
+            }
+            $controller = 'Example\Controllers\Examples\\' . $this->getController($page);
+            $c = new $controller();
+            $c->controller();
+            exit();
+        } elseif ($page == 'ds_login') {
+            $this->ds_login(); // See below in oauth section
+            exit();
+        } elseif ($page == 'ds_callback') {
+            $this->ds_callback(); // See below in oauth section
+            exit();
+        } elseif ($page == 'ds_logout') {
+            $_SESSION['beenHere'] = true;
+            $this->ds_logout(); // See below in oauth section
+            exit();
+        } elseif ($page == 'ds_return') {
+            $GLOBALS['twig']->display('ds_return.html', [
+                'title' => 'Returned data',
+                'event' => isset($_GET['event']) ? $_GET['event'] : false,
+                'envelope_id' => isset($_GET['envelope_id']) ? $_GET['envelope_id'] : false,
+                'state' => isset($_GET['state']) ? $_GET['state'] : false
+            ]);
 
-        //     // handle eg001 being listed in project root
-        // } elseif ($page == 'eg001') {
-        //     // To ignore the Notice instead of Isset on missing POST vars
-        //     error_reporting(E_ALL & ~E_NOTICE);
-        //     $controller = '\Example\\' .$this->getController($page);
-        //     new $controller($page);
-        //     exit();
-
-
-        // } else {
-        //     // To ignore the Notice instead of Isset on missing POST vars
-        //     error_reporting(E_ALL & ~E_NOTICE);
-        //     $controller = '\Example\Controllers\Examples\\' . $this->getController($page);
-        //     new $controller($page);
-        //     exit();
-        // }
-
-        if($_GET['email']){
+            // handle eg001 being listed in project root
+        } elseif ($page == 'eg001') {
+            // To ignore the Notice instead of Isset on missing POST vars
             error_reporting(E_ALL & ~E_NOTICE);
-            $controller = '\Example\Controllers\Examples\\' . $this->getController('eg002');
+            $controller = '\Example\\' .$this->getController($page);
+            new $controller($page);
+            exit();
+
+
+        } else {
+            // To ignore the Notice instead of Isset on missing POST vars
+            error_reporting(E_ALL & ~E_NOTICE);
+            $controller = '\Example\Controllers\Examples\\' . $this->getController($page);
             new $controller($page);
             exit();
         }
+
+        // if($_GET['email']){
+        //     error_reporting(E_ALL & ~E_NOTICE);
+        //     $controller = '\Example\Controllers\Examples\\' . $this->getController('eg002');
+        //     new $controller($page);
+        //     exit();
+        // }
     }
 
     /**
